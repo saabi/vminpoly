@@ -3,6 +3,8 @@ vminpoly
 
 A polyfill for CSS units vw, vh &amp; vmin.
 
+Online [demo](http://saabi.github.com/vminpoly) right here.
+
 This is a working proof of concept right now. There's a lot of cleanup to do on the code.
 
 Since most browsers ignore rules they don't understand, the code must load and parse the original CSS sourcecode. Once this is done, it filters the generated tree leaving only rules that use 'vh', 'vw' & 'vmin' units.
