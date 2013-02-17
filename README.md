@@ -7,7 +7,7 @@ Online [demo](http://saabi.github.com/vminpoly) right here.
 
 This is a working proof of concept right now. There's a lot of cleanup to do on the code.
 
-Since most browsers ignore rules they don't understand, the code must load and parse the original CSS sourcecode. Once this is done, it filters the generated tree leaving only rules that use 'vh', 'vw' & 'vmin' units.
+Since most browsers ignore rules they don't understand, the code must load and parse the original CSS sourcecode. It does this uning a javascript [CSS parser](https://github.com/tabatkins/css-parser). Once this is done, it filters the generated tree leaving only rules that use 'vh', 'vw' & 'vmin' units.
 At window resize time, it generates CSS code for the 'px' equivalents and appends it in a 'style' element at the end of the 'head' element. The generated code respects media queries.
 
 As it is, it's fast enough for a lot of cases, but the code can still be optimized greatly, both in parsing and in resizing.
