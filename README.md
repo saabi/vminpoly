@@ -10,6 +10,8 @@ At window resize time, it generates CSS code for the 'px' equivalents and append
 
 As it is, it's fast enough for a lot of cases, but the code can still be optimized greatly, both in parsing and in resizing.
 
+Also, any suggestions on how to better organize the repo, specially with respect to third party code, is greatly appreciated.
+
 TODO:
 -----
 
