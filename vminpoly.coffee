@@ -60,8 +60,8 @@ initLayoutEngine()
 
 onresize = ->
   dims = 
-    vh: document.documentElement.offsetHeight / 100
-    vw: document.documentElement.offsetWidth / 100
+    vh: window.innerHeight / 100
+    vw: window.innerWidth / 100
   dims.vmin = Math.min dims.vh, dims.vw
 
   generateRuleCode = (rule) ->
