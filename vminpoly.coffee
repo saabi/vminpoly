@@ -6,6 +6,18 @@ head.appendChild styleElement
 ##toCamelCase = (s) ->
 ##  s.replace(/-([a-z])/g, (g) ->
 ##    return g[1].toUpperCase()
+ajax = (url, onload) ->
+  if window.XMLHttpRequest
+    xmlhttp = new XMLHttpRequest()
+  else # code for IE6, IE5
+    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP")
+  xmlhttp.onload = ->
+    onload this.responseText
+    return
+  xmlhttp.open "GET", url, true
+  xmlhttp.send()
+  return
+
 initLayoutEngine = () ->
   analyzeStyleRule = (rule) ->
     declarations = []
@@ -37,16 +49,13 @@ initLayoutEngine = () ->
   for i in links
     unless i.rel is 'stylesheet'
       continue
-    $.ajax
-      url: i.href
-      dataType: "text"
-      success: (cssText) ->
-        tokenlist = tokenize cssText
-        sheet = parse tokenlist
-        analyzeStylesheet sheet
+    ajax i.href, (cssText) ->
+      tokenlist = tokenize cssText
+      sheet = parse tokenlist
+      analyzeStylesheet sheet
+      sheets[i.href] = sheet
+      return
 
-        sheets[i.href] = sheet
-        return
 initLayoutEngine()
 
 onresize = ->
