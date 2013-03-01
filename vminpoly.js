@@ -161,6 +161,6 @@
 
   window.onresize = onresize;
 
-  setTimeout(onresize, 2000);
+  setTimeout(onresize, 100);
 
 }).call(this);

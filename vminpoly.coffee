@@ -104,4 +104,5 @@ onresize = ->
   styleElement.innerHTML = css
 
 window.onresize = onresize
-setTimeout onresize, 200
+setTimeout onresize, 100
+
