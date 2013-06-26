@@ -113,7 +113,7 @@
           if (token.tokenType === 'DIMENSION' && (token.unit === 'vmin' || token.unit === 'vh' || token.unit === 'vw')) {
             ruleCss += "" + (Math.floor(token.num * dims[token.unit])) + "px";
           } else {
-            ruleCss += token.toString();
+            ruleCss += token.toSourceString();
           }
         }
         ruleCss += ";";

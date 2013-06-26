@@ -75,7 +75,7 @@ onresize = ->
         if token.tokenType is 'DIMENSION' and (token.unit is 'vmin' or token.unit is 'vh' or token.unit is 'vw')
           ruleCss += "#{Math.floor(token.num*dims[token.unit])}px"
         else
-          ruleCss += token.toString()
+          ruleCss += token.toSourceString()
       ruleCss += ";"
     ruleCss += "}"
     ruleCss
