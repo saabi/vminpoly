@@ -154,7 +154,7 @@ initLayoutEngine = () ->
       return
 
   window.onresize = onresize
-  document.body.onload = -> setTimeout onresize, 100
+  document.body.onload = -> setTimeout onresize, 200
   return
 
 initLayoutEngine()
