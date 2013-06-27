@@ -143,18 +143,23 @@ initLayoutEngine = () ->
   head.appendChild styleElement
 
   links = document.getElementsByTagName 'link'
+  innerSheetCount = 0;
+  outerSheetCount = 0;
   for i in links
     unless i.rel is 'stylesheet'
       continue
+    innerSheetCount++;
     ajax i.href, (cssText) ->
       tokenlist = tokenize cssText
       sheet = parse tokenlist
       analyzeStylesheet sheet
       sheets[i.href] = sheet
+      outerSheetCount++
+      if outerSheetCount is innerSheetCount
+        window.onresize()
       return
 
   window.onresize = onresize
-  document.body.onload = -> setTimeout onresize, 200
   return
 
 initLayoutEngine()

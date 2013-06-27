@@ -70,7 +70,7 @@
   };
 
   initLayoutEngine = function() {
-    var analyzeStyleRule, analyzeStylesheet, head, i, links, onresize, sheets, styleElement, _i, _len;
+    var analyzeStyleRule, analyzeStylesheet, head, i, innerSheetCount, links, onresize, outerSheetCount, sheets, styleElement, _i, _len;
 
     analyzeStyleRule = function(rule) {
       var declaration, declarations, hasDimension, token, _i, _j, _len, _len1, _ref, _ref1;
@@ -215,11 +215,14 @@
     head = document.getElementsByTagName('head')[0];
     head.appendChild(styleElement);
     links = document.getElementsByTagName('link');
+    innerSheetCount = 0;
+    outerSheetCount = 0;
     for (_i = 0, _len = links.length; _i < _len; _i++) {
       i = links[_i];
       if (i.rel !== 'stylesheet') {
         continue;
       }
+      innerSheetCount++;
       ajax(i.href, function(cssText) {
         var sheet, tokenlist;
 
@@ -227,12 +230,13 @@
         sheet = parse(tokenlist);
         analyzeStylesheet(sheet);
         sheets[i.href] = sheet;
+        outerSheetCount++;
+        if (outerSheetCount === innerSheetCount) {
+          window.onresize();
+        }
       });
     }
     window.onresize = onresize;
-    document.body.onload = function() {
-      return setTimeout(onresize, 200);
-    };
   };
 
   initLayoutEngine();
