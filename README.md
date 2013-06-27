@@ -35,3 +35,4 @@ Latest Changes:
 * Also, I removed the dependency on jQuery.
 * Now resizes correctly right after page load.
 * Media query support!! (rudimentary, but check out the [new demo!](http://saabi.github.com/vminpoly/demo2.html))
+* Right now, media queries only apply to rules with vw,vh/vmin units. Other rules won't be applied just yet. More to come...
