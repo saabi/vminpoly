@@ -230,7 +230,9 @@
       });
     }
     window.onresize = onresize;
-    return setTimeout(onresize, 100);
+    document.body.onload = function() {
+      return setTimeout(onresize, 100);
+    };
   };
 
   initLayoutEngine();

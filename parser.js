@@ -121,6 +121,7 @@ function parse(tokens) {
 
 		case "declaration":
 			switch(token.tokenType) {
+			case "DELIM":
 			case "WHITESPACE":
 			case ";": break;
 			case "}": pop() && switchto(); break;
