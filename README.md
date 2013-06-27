@@ -31,7 +31,7 @@ In short, the only browser with apparently full native support right now is Fire
 Latest Changes:
 ---------------
 
-* After some bug fixes it finally works down to IE5.5!
+* After some bug fixes it finally works down to **IE5.5 on the desktop** and **Opera Mini on mobile**!!
 * Also, I removed the dependency on jQuery.
 * Now resizes correctly right after page load.
 * Media query support!! (rudimentary, but check out the [new demo!](http://saabi.github.com/vminpoly/demo2.html))
