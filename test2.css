@@ -1,0 +1,386 @@
+body,
+footer {
+  -webkit-transition: height, width 500ms cubic-bezier(0.115, 0, 0, 1);
+  -moz-transition: height, width 500ms cubic-bezier(0.115, 0, 0, 1);
+  -o-transition: height, width 500ms cubic-bezier(0.115, 0, 0, 1);
+  transition: height, width 500ms cubic-bezier(0.115, 0, 0, 1);
+}
+#logo,
+#highlights,
+#nav,
+#news article,
+#ads article,
+footer {
+  -webkit-transition: all 500ms cubic-bezier(0.115, 0, 0, 1);
+  -moz-transition: all 500ms cubic-bezier(0.115, 0, 0, 1);
+  -o-transition: all 500ms cubic-bezier(0.115, 0, 0, 1);
+  transition: all 500ms cubic-bezier(0.115, 0, 0, 1);
+}
+
+html {background: white;}
+#logo,
+#nav,
+#news article,
+footer {
+  background: silver;
+}
+#ads article {
+  background: gray;
+}
+#highlights {
+  background: darkblue;
+  color: white;
+}
+
+
+html {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+body {
+  position: relative;
+  margin: 5.4vmin auto;
+  width: 160vmin;
+  height: 90vmin;
+  font-size: 2vmin;
+  overflow: hidden;
+}
+#logo {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  left: 0.6vmin;
+  top: 0.6vmin;
+  width: 38.8vmin;
+  height: 18.8vmin;
+  overflow: hidden;
+}
+a {
+  text-decoration: none;
+}
+#nav {
+  position: absolute;
+  left: 40.6vmin;
+  top: 0.6vmin;
+  width: 118.8vmin;
+  height: 18.8vmin;  
+}
+#highlights {
+  position: absolute;
+  overflow: hidden;
+  width: 78.8vmin;
+  height: 38.8vmin;
+  top: 20.6vmin;
+  left: 0.6vmin;
+}
+#item1,
+#item2,
+#item3 {
+  display: block;
+}
+#news article {
+  position: absolute;
+  width: 38.8vmin;
+  height: 18.8vmin;
+  top: 60.6vmin;
+}
+#item1 {
+  left: 0.6vmin;
+}
+#item2 {
+  left: 40.6vmin;
+}
+#item3 {
+  left: 80.6vmin;
+}
+#ads article {
+  position: absolute;
+  overflow: hidden;
+  width: 38.8vmin;
+  height: 18.8vmin;
+}
+#ad1 {
+  top: 20.6vmin;
+  left: 80.6vmin;
+}
+#ad2 {
+  top: 40.6vmin;
+  left: 80.6vmin;
+}
+#ad3 {
+  top: 20.6vmin;
+  left: 120.6vmin;
+}
+footer {
+  position: absolute;
+  left: 0.6vmin;
+  width: 158.8vmin;
+  height: 8.8vmin;
+  top: 80.6vmin;
+}
+
+@media (max-aspect-ratio:80/45) {
+  body {
+    width: 140vmin;
+  }
+  #logo {
+    width: 18.8vmin;
+  }
+  #nav {
+    position: absolute;
+    left: 20.6vmin;
+    width: 118.8vmin;
+  }
+  #highlights {
+    left: 0.6vmin;
+  }
+  #ad1,
+  #ad2 {
+    left: 80.6vmin;
+  }
+  #ad3 {
+    left: 120.6vmin;
+    top: 20.6vmin;
+    width: 18.8vmin;
+    height: 38.8vmin;
+  }
+  footer {
+    width: 138.8vmin;
+  }
+}
+@media (max-aspect-ratio:80/55) {
+  body {
+    margin: 4.5vmin auto;
+    width: 116.66666666666667vmin;
+    height: 91.66666666666667vmin;
+    font-size: 1.6666666666666667vmin;
+  }
+  #logo {
+    left: 0.5vmin;
+    top: 0.5vmin;
+    width: 15.666666666666668vmin;
+    height: 15.666666666666668vmin;
+  }
+  #nav {
+    position: absolute;
+    left: 17.166666666666668vmin;
+    top: 0.5vmin;
+    width: 99vmin;
+    height: 15.666666666666668vmin;
+  }
+  #highlights {
+    left: 0.5vmin;
+    top: 17.166666666666668vmin;
+    width: 82.33333333333333vmin;
+    height: 49vmin;
+  }
+  #news article {
+    width: 32.333333333333336vmin;
+    height: 15.666666666666668vmin;
+    top: 67.16666666666667vmin;
+  }
+  #item1 {
+    left: 0.5vmin;
+  }
+  #item2 {
+    left: 33.833333333333336vmin;
+  }
+  #item3 {
+    left: 67.16666666666667vmin;
+  }
+  #ads article {
+    width: 32.333333333333336vmin;
+    height: 15.666666666666668vmin;
+  }
+  #ad1 {
+    top: 17.166666666666668vmin;
+    left: 83.83333333333333vmin;
+  }
+  #ad2 {
+    top: 33.833333333333336vmin;
+    left: 83.83333333333333vmin;
+  }
+  #ad3 {
+    top: 50.5vmin;
+    width: 32.333333333333336vmin;
+    left: 83.83333333333333vmin;
+  }
+  footer {
+    left: 0.5vmin;
+    width: 115.66666666666667vmin;
+    height: 7.333333333333334vmin;
+    top: 83.83333333333333vmin;
+  }
+}
+@media (max-aspect-ratio:70/55) {
+  body {
+    width: 100vmin;
+  }
+  body:before {
+    width: 100vmin;
+  }
+  #highlights {
+    left: 17.166666666666668vmin;
+    width: 65.66666666666667vmin;
+    height: 32.333333333333336vmin;
+  }
+  #ads article {
+    width: 32.333333333333336vmin;
+  }
+  #ad1 {
+    top: 50.5vmin;
+    width: 32.333333333333336vmin;
+    left: 0.5vmin;
+  }
+  #ad2 {
+    top: 50.5vmin;
+    width: 32.333333333333336vmin;
+    left: 33.833333333333336vmin;
+  }
+  #ad3 {
+    top: 50.5vmin;
+    width: 32.333333333333336vmin;
+    left: 67.16666666666667vmin;
+  }
+  footer {
+    width: 99vmin;
+  }
+}
+@media (max-aspect-ratio:65/65) {
+  body {
+    margin: 3.857142857142857vmin auto;
+    width: 71.42857142857143vmin;
+    height: 92.85714285714286vmin;
+    font-size: 1.4285714285714286vmin;
+  }
+  #logo {
+    left: 0.42857142857142855vmin;
+    top: 0.42857142857142855vmin;
+    width: 13.428571428571429vmin;
+    height: 13.428571428571429vmin;
+  }
+  #nav {
+    left: 14.714285714285715vmin;
+    top: 0.42857142857142855vmin;
+    width: 56.28571428571429vmin;
+    height: 13.428571428571429vmin;
+  }
+  #highlights {
+    left: 0.42857142857142855vmin;
+    top: 14.714285714285715vmin;
+    width: 70.57142857142857vmin;
+    height: 42vmin;
+  }
+  #news article {
+    width: 27.714285714285715vmin;
+    height: 13.428571428571429vmin;
+    top: 71.85714285714286vmin;
+  }
+  #item1 {
+    left: 0.42857142857142855vmin;
+    top: 57.57142857142858vmin;
+  }
+  #item2 {
+    left: 0.42857142857142855vmin;
+  }
+  #item3 {
+    left: 29vmin;
+  }
+  #ads article {
+    width: 13.428571428571429vmin;
+    height: 13.428571428571429vmin;
+  }
+  #ad1 {
+    top: 57.57142857142858vmin;
+    left: 29vmin;
+  }
+  #ad2 {
+    top: 57.57142857142858vmin;
+    left: 43.285714285714285vmin;
+  }
+  #ad3 {
+    top: 57.57142857142858vmin;
+    height: 27.714285714285715vmin;
+    left: 57.57142857142858vmin;
+  }
+  footer {
+    top: 86.14285714285714vmin;
+    left: 0.42857142857142855vmin;
+    width: 70.57142857142857vmin;
+    height: 6.2857142857142865vmin;
+  }
+}
+@media (max-aspect-ratio:65/75) {
+  body {
+    margin: 3.857142857142857vmin auto;
+    height: 107.14285714285714vmin;
+  }
+  #logo {
+    top: 0.42857142857142855vmin;
+    width: 27.714285714285715vmin;
+  }
+  #nav {
+    background: none;
+    left: 0.42857142857142855vmin;
+    top: 14.714285714285715vmin;
+    width: 70.57142857142857vmin;
+    height: 13.428571428571429vmin;
+  }
+  #highlights {
+    top: 29vmin;
+  }
+  #item1 {
+    top: 71.85714285714286vmin;
+  }
+  #item2 {
+    top: 86.14285714285714vmin;
+  }
+  #item3 {
+    top: 86.14285714285714vmin;
+  }
+  #ad1 {
+    top: 71.85714285714286vmin;
+  }
+  #ad2 {
+    top: 71.85714285714286vmin;
+  }
+  #ad3 {
+    top: 71.85714285714286vmin;
+  }
+  footer {
+    left: 0.42857142857142855vmin;
+    width: 70.57142857142857vmin;
+    height: 6.2857142857142865vmin;
+    top: 100.42857142857143vmin;
+  }
+}
+@media (max-aspect-ratio:65/85) {
+  body {
+    height: 121.42857142857143vmin;
+  }
+  #item1 {
+    top: 86.14285714285714vmin;
+  }
+  #item2 {
+    top: 100.42857142857143vmin;
+  }
+  #item3 {
+    top: 86.14285714285714vmin;
+  }
+  #ad1 {
+    left: 0.42857142857142855vmin;
+  }
+  #ad2 {
+    left: 29vmin;
+  }
+  #ad3 {
+    top: 71.85714285714286vmin;
+  }
+  footer {
+    top: 114.71428571428572vmin;
+  }
+}
