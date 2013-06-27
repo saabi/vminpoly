@@ -3,7 +3,7 @@ vminpoly
 
 A polyfill for CSS units vw, vh &amp; vmin.
 
-Online [demo](http://saabi.github.com/vminpoly) right here.
+Simple online [demo](http://saabi.github.com/vminpoly) right here. A more sopisticated [responsive demo](http://saabi.github.com/vminpoly/demo2.html) demonstrating vw/vh/vmin units along with *media queries*, working right down to IE5.5!!
 
 This is a working proof of concept right now. There's a lot of cleanup to do on the code.
 
@@ -31,6 +31,7 @@ In short, the only browser with apparently full native support right now is Fire
 Latest Changes:
 ---------------
 
-* After some bug fixes it finally works down to IE6!
+* After some bug fixes it finally works down to IE5.5!
 * Also, I removed the dependency on jQuery.
 * Now resizes correctly right after page load.
+* Media query support!! (rudimentary, but check out the [new demo!](http://saabi.github.com/vminpoly/demo2.html))
