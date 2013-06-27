@@ -22,7 +22,7 @@ TODO:
 * Only linked stylesheets are being parsed right now but it's very easy to also parse 'style' elements.
 * Also, recursively parse @import rules.
 * The CSS parser has some trouble parsing some whitespaces it seems. So that has to be looked into...
-* tokenizer.js fails in IE8, so no luck there and I presume in earlier IEs for now. It's working fine in IE9, Firefox and Opera, which doesn't support any of the units. Chrome, Safari and the Firefox beta don't need it.
+* It's working fine in IE5.5+, Firefox, Opera and even Opera Mini, which doesn't support any of the units or media queries. Chrome, Safari and the Firefox beta don't need it.
 * Well... Chrome and Safari actually can benefit from it as they don't properly handle font-size natively while resizing the window.
 * Add some more examples of what can be achieved.
 
