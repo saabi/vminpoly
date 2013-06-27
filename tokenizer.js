@@ -497,7 +497,7 @@ function stringFromCodeArray(arr) {
 function CSSParserToken(options) { return this; }
 CSSParserToken.prototype.finish = function() { return this; }
 CSSParserToken.prototype.toString = function() { return this.tokenType; }
-CSSParserToken.prototype.toSourceString = function() { return ''; } // TODO: Is this needed?
+CSSParserToken.prototype.toSourceString = CSSParserToken.prototype.toString;
 CSSParserToken.prototype.toJSON = function() { return this.toString(); }
 
 function BadStringToken() { return this; }
@@ -643,6 +643,7 @@ function StringToken(val) {
 StringToken.prototype = new StringValuedToken;
 StringToken.prototype.tokenType = "STRING";
 StringToken.prototype.toString = function() { return "\""+this.value+"\""; }
+StringToken.prototype.toSourceString = StringToken.prototype.toString;
 
 function URLToken(val) {
 	this.value = [];
