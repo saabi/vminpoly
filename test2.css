@@ -1,5 +1,5 @@
 body,
-footer {
+#footer {
   -webkit-transition: height, width 500ms cubic-bezier(0.115, 0, 0, 1);
   -moz-transition: height, width 500ms cubic-bezier(0.115, 0, 0, 1);
   -o-transition: height, width 500ms cubic-bezier(0.115, 0, 0, 1);
@@ -8,9 +8,9 @@ footer {
 #logo,
 #highlights,
 #nav,
-#news article,
-#ads article,
-footer {
+#news div,
+#ads div,
+#footer {
   -webkit-transition: all 500ms cubic-bezier(0.115, 0, 0, 1);
   -moz-transition: all 500ms cubic-bezier(0.115, 0, 0, 1);
   -o-transition: all 500ms cubic-bezier(0.115, 0, 0, 1);
@@ -20,11 +20,11 @@ footer {
 html {background: white;}
 #logo,
 #nav,
-#news article,
-footer {
+#news div,
+#footer {
   background: silver;
 }
-#ads article {
+#ads div {
   background: gray;
 }
 #highlights {
@@ -32,7 +32,12 @@ footer {
   color: white;
 }
 
-
+h1 {
+  font-size: 6vmin;
+}
+div {
+    font-size: 4vmin;
+}
 html {
   position: absolute;
   width: 100%;
@@ -46,7 +51,6 @@ body {
   margin: 5.4vmin auto;
   width: 160vmin;
   height: 90vmin;
-  font-size: 2vmin;
   overflow: hidden;
 }
 #logo {
@@ -82,40 +86,47 @@ a {
 #item3 {
   display: block;
 }
-#news article {
+#news div,
+#ads div {
   position: absolute;
-  width: 38.8vmin;
-  height: 18.8vmin;
-  top: 60.6vmin;
 }
 #item1 {
   left: 0.6vmin;
+  top: 60.6vmin;
+  width: 38.8vmin;
+  height: 18.8vmin;
 }
 #item2 {
   left: 40.6vmin;
+  top: 60.6vmin;
+  width: 38.8vmin;
+  height: 18.8vmin;
 }
 #item3 {
   left: 80.6vmin;
-}
-#ads article {
-  position: absolute;
-  overflow: hidden;
+  top: 60.6vmin;
   width: 38.8vmin;
   height: 18.8vmin;
 }
 #ad1 {
   top: 20.6vmin;
   left: 80.6vmin;
+  width: 38.8vmin;
+  height: 18.8vmin;
 }
 #ad2 {
   top: 40.6vmin;
   left: 80.6vmin;
+  width: 38.8vmin;
+  height: 18.8vmin;
 }
 #ad3 {
   top: 20.6vmin;
   left: 120.6vmin;
+  width: 38.8vmin;
+  height: 18.8vmin;
 }
-footer {
+#footer {
   position: absolute;
   left: 0.6vmin;
   width: 158.8vmin;
@@ -148,7 +159,7 @@ footer {
     width: 18.8vmin;
     height: 38.8vmin;
   }
-  footer {
+  #footer {
     width: 138.8vmin;
   }
 }
@@ -178,38 +189,43 @@ footer {
     width: 82.33333333333333vmin;
     height: 49vmin;
   }
-  #news article {
+  #item1 {
+    left: 0.5vmin;
     width: 32.333333333333336vmin;
     height: 15.666666666666668vmin;
     top: 67.16666666666667vmin;
   }
-  #item1 {
-    left: 0.5vmin;
-  }
   #item2 {
     left: 33.833333333333336vmin;
+    width: 32.333333333333336vmin;
+    height: 15.666666666666668vmin;
+    top: 67.16666666666667vmin;
   }
   #item3 {
     left: 67.16666666666667vmin;
-  }
-  #ads article {
     width: 32.333333333333336vmin;
     height: 15.666666666666668vmin;
+    top: 67.16666666666667vmin;
   }
   #ad1 {
     top: 17.166666666666668vmin;
     left: 83.83333333333333vmin;
+    width: 32.333333333333336vmin;
+    height: 15.666666666666668vmin;
   }
   #ad2 {
     top: 33.833333333333336vmin;
     left: 83.83333333333333vmin;
+    width: 32.333333333333336vmin;
+    height: 15.666666666666668vmin;
   }
   #ad3 {
     top: 50.5vmin;
-    width: 32.333333333333336vmin;
     left: 83.83333333333333vmin;
+    width: 32.333333333333336vmin;
+    height: 15.666666666666668vmin;
   }
-  footer {
+  #footer {
     left: 0.5vmin;
     width: 115.66666666666667vmin;
     height: 7.333333333333334vmin;
@@ -220,16 +236,13 @@ footer {
   body {
     width: 100vmin;
   }
-  body:before {
-    width: 100vmin;
+  #nav {
+    width: 83.33333333333333vmin;
   }
   #highlights {
     left: 17.166666666666668vmin;
     width: 65.66666666666667vmin;
     height: 32.333333333333336vmin;
-  }
-  #ads article {
-    width: 32.333333333333336vmin;
   }
   #ad1 {
     top: 50.5vmin;
@@ -246,7 +259,7 @@ footer {
     width: 32.333333333333336vmin;
     left: 67.16666666666667vmin;
   }
-  footer {
+  #footer {
     width: 99vmin;
   }
 }
@@ -275,39 +288,43 @@ footer {
     width: 70.57142857142857vmin;
     height: 42vmin;
   }
-  #news article {
-    width: 27.714285714285715vmin;
-    height: 13.428571428571429vmin;
-    top: 71.85714285714286vmin;
-  }
   #item1 {
     left: 0.42857142857142855vmin;
     top: 57.57142857142858vmin;
+    width: 27.714285714285715vmin;
+    height: 13.428571428571429vmin;
   }
   #item2 {
     left: 0.42857142857142855vmin;
+    top: 71.85714285714286vmin;
+    width: 27.714285714285715vmin;
+    height: 13.428571428571429vmin;
   }
   #item3 {
     left: 29vmin;
-  }
-  #ads article {
-    width: 13.428571428571429vmin;
+    top: 71.85714285714286vmin;
+    width: 27.714285714285715vmin;
     height: 13.428571428571429vmin;
   }
   #ad1 {
     top: 57.57142857142858vmin;
     left: 29vmin;
+    width: 13.428571428571429vmin;
+    height: 13.428571428571429vmin;
   }
   #ad2 {
     top: 57.57142857142858vmin;
     left: 43.285714285714285vmin;
+    width: 13.428571428571429vmin;
+    height: 13.428571428571429vmin;
   }
   #ad3 {
     top: 57.57142857142858vmin;
     height: 27.714285714285715vmin;
+    width: 13.428571428571429vmin;
     left: 57.57142857142858vmin;
   }
-  footer {
+  #footer {
     top: 86.14285714285714vmin;
     left: 0.42857142857142855vmin;
     width: 70.57142857142857vmin;
@@ -324,7 +341,6 @@ footer {
     width: 27.714285714285715vmin;
   }
   #nav {
-    background: none;
     left: 0.42857142857142855vmin;
     top: 14.714285714285715vmin;
     width: 70.57142857142857vmin;
@@ -351,7 +367,7 @@ footer {
   #ad3 {
     top: 71.85714285714286vmin;
   }
-  footer {
+  #footer {
     left: 0.42857142857142855vmin;
     width: 70.57142857142857vmin;
     height: 6.2857142857142865vmin;
@@ -373,14 +389,16 @@ footer {
   }
   #ad1 {
     left: 0.42857142857142855vmin;
+    width: 27.714285714285715vmin;
   }
   #ad2 {
     left: 29vmin;
+    width: 27.714285714285715vmin;
   }
   #ad3 {
     top: 71.85714285714286vmin;
   }
-  footer {
+  #footer {
     top: 114.71428571428572vmin;
   }
 }
