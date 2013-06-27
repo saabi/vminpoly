@@ -3,7 +3,7 @@ vminpoly
 
 A polyfill for CSS units vw, vh &amp; vmin.
 
-Simple online [demo](http://saabi.github.com/vminpoly) right here. A more sopisticated [responsive demo](http://saabi.github.com/vminpoly/demo2.html) demonstrating vw/vh/vmin units along with *media queries*, working right down to IE5.5 on the desktop and Opera Mini on mobiles!! (In Opera Mini the browser must be refreshed after changing phone orientations as it appears it doesn't trigger the window resize event)
+Simple online [demo](http://saabi.github.com/vminpoly) right here. A more sophisticated [responsive demo](http://saabi.github.com/vminpoly/demo2.html) demonstrating vw/vh/vmin units along with *media queries*, working right down to IE5.5 on the desktop and Opera Mini on mobiles!! (In Opera Mini the browser must be refreshed after changing phone orientations as it appears it doesn't trigger the window resize event)
 
 This is a working proof of concept right now. There's a lot of cleanup to do on the code.
 
