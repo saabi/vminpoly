@@ -33,3 +33,4 @@ Latest Changes:
 
 * After some bug fixes it finally works down to IE6!
 * Also, I removed the dependency on jQuery.
+* Now resizes correctly right after page load.
