@@ -31,4 +31,5 @@ In short, the only browser with apparently full native support right now is Fire
 Latest Changes:
 ---------------
 
-After some bug fixes it finally works down to IE6!
+* After some bug fixes it finally works down to IE6!
+* Also, I removed the dependency on jQuery.
