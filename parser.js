@@ -76,6 +76,9 @@ function parse(tokens) {
 	for(;;) {
 		consume();
 
+		if (token.tokenType === 'DELIM' && token.value === '\r')
+			continue;
+
 		switch(mode) {
 		case "top-level":
 			switch(token.tokenType) {
@@ -121,7 +124,6 @@ function parse(tokens) {
 
 		case "declaration":
 			switch(token.tokenType) {
-			case "DELIM":
 			case "WHITESPACE":
 			case ";": break;
 			case "}": pop() && switchto(); break;
