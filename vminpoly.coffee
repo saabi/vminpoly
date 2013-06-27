@@ -1,22 +1,55 @@
-sheets = {}
-styleElement = document.createElement 'style'
-head = document.getElementsByTagName('head')[0]
-head.appendChild styleElement
+XMLHttpFactories = [
+  -> new XMLHttpRequest(),
+  -> new ActiveXObject("Msxml2.XMLHTTP"),
+  -> new ActiveXObject("Msxml3.XMLHTTP"),
+  -> new ActiveXObject("Microsoft.XMLHTTP")]
+
+createXMLHTTPObject = ->
+  xmlhttp = false
+  i = 0
+
+  while i < XMLHttpFactories.length
+    try
+      xmlhttp = XMLHttpFactories[i++]()
+    catch e
+      continue
+    break
+  xmlhttp
 
 ##toCamelCase = (s) ->
 ##  s.replace(/-([a-z])/g, (g) ->
 ##    return g[1].toUpperCase()
+
 ajax = (url, onload) ->
-  if window.XMLHttpRequest
-    xmlhttp = new XMLHttpRequest()
-  else # code for IE6, IE5
-    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP")
-  xmlhttp.onload = ->
-    onload this.responseText
+  xmlhttp = createXMLHTTPObject()
+  xmlhttp.onreadystatechange = ->
+    unless xmlhttp.readyState is 4
+      return
+    unless xmlhttp.status is 200
+      throw "Error!"
+    onload xmlhttp.responseText
     return
   xmlhttp.open "GET", url, true
   xmlhttp.send()
   return
+
+# get window dimensions, cross-browser compatible
+# Thanks to: Stefano Gargiulo
+getViewportSize = ->
+  x = 0
+  y = 0
+  if window.innerHeight # all except Explorer < 9
+    x = window.innerWidth
+    y = window.innerHeight
+  else if document.documentElement and document.documentElement.clientHeight
+    # Explorer 6 Strict Mode
+    x = document.documentElement.clientWidth
+    y = document.documentElement.clientHeight
+  else if document.body # other Explorers < 9
+    x = document.body.clientWidth
+    y = document.body.clientHeight
+  width: x
+  height: y
 
 initLayoutEngine = () ->
   analyzeStyleRule = (rule) ->
@@ -45,6 +78,70 @@ initLayoutEngine = () ->
     sheet.value = rules
     rules
 
+  onresize = ->
+    vpDims = getViewportSize()
+
+    dims = 
+      vh: vpDims.height / 100
+      vw: vpDims.width / 100
+    dims.vmin = Math.min dims.vh, dims.vw
+
+    generateRuleCode = (rule) ->
+      declarations = []
+      map = (a, f) ->
+        if a.map?
+          a.map f
+        else
+          a1 = []
+          for e in a
+            a1.push f e
+          a1
+
+      ruleCss = (map rule.selector, (o) -> o.toSourceString()).join ''
+      ruleCss += "{"
+      for declaration in rule.value
+        ruleCss += declaration.name
+        ruleCss += ":"
+        for token in declaration.value
+          if token.tokenType is 'DIMENSION' and (token.unit is 'vmin' or token.unit is 'vh' or token.unit is 'vw')
+            ruleCss += "#{Math.floor(token.num*dims[token.unit])}px"
+          else
+            ruleCss += token.toSourceString()
+        ruleCss += ";"
+      ruleCss += "}"
+      ruleCss
+    generateSheetCode = (sheet) ->
+      sheetCss = ''
+      for rule in sheet.value
+        switch rule.type
+          when 'STYLE-RULE'
+            sheetCss += generateRuleCode rule
+          when 'AT-RULE'
+            prelude = ''
+            for t in rule.prelude
+              if t.name is '('
+                prelude += '('
+                prelude += t.value.join ''
+                prelude += ')'
+              else
+                prelude += t.toSourceString()
+            sheetCss += "@#{rule.name} #{prelude} {"
+            sheetCss += generateSheetCode rule
+            sheetCss += '}\n'
+      sheetCss
+    css = ''
+    for url, sheet of sheets
+      css += generateSheetCode sheet
+    if styleElement.styleSheet?
+      styleElement.styleSheet.cssText = css
+    else
+      styleElement.innerHTML = css
+
+  sheets = {}
+  styleElement = document.createElement 'style'
+  head = document.getElementsByTagName('head')[0]
+  head.appendChild styleElement
+
   links = document.getElementsByTagName 'link'
   for i in links
     unless i.rel is 'stylesheet'
@@ -56,53 +153,9 @@ initLayoutEngine = () ->
       sheets[i.href] = sheet
       return
 
+  window.onresize = onresize
+  setTimeout onresize, 100
+
 initLayoutEngine()
 
-onresize = ->
-  dims = 
-    vh: window.innerHeight / 100
-    vw: window.innerWidth / 100
-  dims.vmin = Math.min dims.vh, dims.vw
-
-  generateRuleCode = (rule) ->
-    declarations = []
-    ruleCss = rule.selector.join ''
-    ruleCss += "{"
-    for declaration in rule.value
-      ruleCss += declaration.name
-      ruleCss += ":"
-      for token in declaration.value
-        if token.tokenType is 'DIMENSION' and (token.unit is 'vmin' or token.unit is 'vh' or token.unit is 'vw')
-          ruleCss += "#{Math.floor(token.num*dims[token.unit])}px"
-        else
-          ruleCss += token.toSourceString()
-      ruleCss += ";"
-    ruleCss += "}"
-    ruleCss
-  generateSheetCode = (sheet) ->
-    sheetCss = ''
-    for rule in sheet.value
-      switch rule.type
-        when 'STYLE-RULE'
-          sheetCss += generateRuleCode rule
-        when 'AT-RULE'
-          prelude = ''
-          for t in rule.prelude
-            if t.name is '('
-              prelude += '('
-              prelude += t.value.join ''
-              prelude += ')'
-            else
-              prelude += t.toString()
-          sheetCss += "@#{rule.name} #{prelude} {"
-          sheetCss += generateSheetCode rule
-          sheetCss += '}'
-    sheetCss
-  css = ''
-  for url, sheet of sheets
-    css += generateSheetCode sheet
-  styleElement.innerHTML = css
-
-window.onresize = onresize
-setTimeout onresize, 100
 
