@@ -119,7 +119,7 @@
       return rules;
     };
     onresize = function() {
-      var css, dims, generateRuleCode, generateSheetCode, sheet, url, vpDims;
+      var css, dims, generateRuleCode, generateSheetCode, map, sheet, url, vpAspectRatio, vpDims;
 
       vpDims = getViewportSize();
       dims = {
@@ -127,26 +127,31 @@
         vw: vpDims.width / 100
       };
       dims.vmin = Math.min(dims.vh, dims.vw);
+      vpAspectRatio = vpDims.width / vpDims.height;
+      map = function(a, f) {
+        var a1, e, _i, _len;
+
+        if (a.map != null) {
+          return a.map(f);
+        } else {
+          a1 = [];
+          for (_i = 0, _len = a.length; _i < _len; _i++) {
+            e = a[_i];
+            a1.push(f(e));
+          }
+          return a1;
+        }
+      };
       generateRuleCode = function(rule) {
-        var declaration, declarations, map, ruleCss, token, _i, _j, _len, _len1, _ref, _ref1;
+        var declaration, declarations, ruleCss, token, _i, _j, _len, _len1, _ref, _ref1;
 
         declarations = [];
-        map = function(a, f) {
-          var a1, e, _i, _len;
-
-          if (a.map != null) {
-            return a.map(f);
-          } else {
-            a1 = [];
-            for (_i = 0, _len = a.length; _i < _len; _i++) {
-              e = a[_i];
-              a1.push(f(e));
-            }
-            return a1;
-          }
-        };
         ruleCss = (map(rule.selector, function(o) {
-          return o.toSourceString();
+          if (o.toSourceString != null) {
+            return o.toSourceString();
+          } else {
+            return '';
+          }
         })).join('');
         ruleCss += "{";
         _ref = rule.value;
@@ -165,11 +170,11 @@
           }
           ruleCss += ";";
         }
-        ruleCss += "}";
+        ruleCss += "}\r";
         return ruleCss;
       };
       generateSheetCode = function(sheet) {
-        var prelude, rule, sheetCss, t, _i, _j, _len, _len1, _ref, _ref1;
+        var mar, nums, prelude, rule, sheetCss, source, t, t1, _i, _j, _k, _l, _len, _len1, _len2, _len3, _ref, _ref1, _ref2, _ref3;
 
         sheetCss = '';
         _ref = sheet.value;
@@ -180,21 +185,58 @@
               sheetCss += generateRuleCode(rule);
               break;
             case 'AT-RULE':
-              prelude = '';
-              _ref1 = rule.prelude;
-              for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
-                t = _ref1[_j];
-                if (t.name === '(') {
-                  prelude += '(';
-                  prelude += t.value.join('');
-                  prelude += ')';
-                } else {
-                  prelude += t.toSourceString();
+              if (rule.name === 'media') {
+                prelude = '';
+                mar = false;
+                nums = [];
+                _ref1 = rule.prelude;
+                for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+                  t = _ref1[_j];
+                  if (t.name === '(') {
+                    prelude += '(';
+                    _ref2 = t.value;
+                    for (_k = 0, _len2 = _ref2.length; _k < _len2; _k++) {
+                      t1 = _ref2[_k];
+                      source = t1.toSourceString != null ? t1.toSourceString() : '';
+                      if (t1.tokenType === 'IDENT' && source === 'max-aspect-ratio') {
+                        mar = true;
+                      }
+                      if (t1.tokenType === 'NUMBER') {
+                        nums.push(parseInt(source));
+                      }
+                      prelude += source;
+                    }
+                    prelude += ')';
+                  } else {
+                    prelude += t.toSourceString();
+                  }
                 }
+                if (vpAspectRatio < nums[0] / nums[1]) {
+                  sheetCss += generateSheetCode(rule);
+                }
+              } else {
+                prelude = '';
+                _ref3 = rule.prelude;
+                for (_l = 0, _len3 = _ref3.length; _l < _len3; _l++) {
+                  t = _ref3[_l];
+                  if (t.name === '(') {
+                    prelude += '(';
+                    prelude += (map(t.value, function(o) {
+                      if (o.toSourceString != null) {
+                        return o.toSourceString();
+                      } else {
+                        return '';
+                      }
+                    })).join('');
+                    prelude += ')';
+                  } else {
+                    prelude += t.toSourceString();
+                  }
+                }
+                sheetCss += "@" + rule.name + " " + prelude + " {";
+                sheetCss += generateSheetCode(rule);
+                sheetCss += '}\n';
               }
-              sheetCss += "@" + rule.name + " " + prelude + " {";
-              sheetCss += generateSheetCode(rule);
-              sheetCss += '}\n';
           }
         }
         return sheetCss;

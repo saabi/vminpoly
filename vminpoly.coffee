@@ -86,18 +86,21 @@ initLayoutEngine = () ->
       vw: vpDims.width / 100
     dims.vmin = Math.min dims.vh, dims.vw
 
+    vpAspectRatio = vpDims.width / vpDims.height
+
+    map = (a, f) ->
+      if a.map?
+        a.map f
+      else
+        a1 = []
+        for e in a
+          a1.push f e
+        a1
+
     generateRuleCode = (rule) ->
       declarations = []
-      map = (a, f) ->
-        if a.map?
-          a.map f
-        else
-          a1 = []
-          for e in a
-            a1.push f e
-          a1
 
-      ruleCss = (map rule.selector, (o) -> o.toSourceString()).join ''
+      ruleCss = (map rule.selector, (o) -> if o.toSourceString? then o.toSourceString() else '').join ''
       ruleCss += "{"
       for declaration in rule.value
         ruleCss += declaration.name
@@ -108,7 +111,7 @@ initLayoutEngine = () ->
           else
             ruleCss += token.toSourceString()
         ruleCss += ";"
-      ruleCss += "}"
+      ruleCss += "}\r"
       ruleCss
     generateSheetCode = (sheet) ->
       sheetCss = ''
@@ -117,17 +120,41 @@ initLayoutEngine = () ->
           when 'STYLE-RULE'
             sheetCss += generateRuleCode rule
           when 'AT-RULE'
-            prelude = ''
-            for t in rule.prelude
-              if t.name is '('
-                prelude += '('
-                prelude += t.value.join ''
-                prelude += ')'
-              else
-                prelude += t.toSourceString()
-            sheetCss += "@#{rule.name} #{prelude} {"
-            sheetCss += generateSheetCode rule
-            sheetCss += '}\n'
+            if rule.name is 'media'
+              prelude = ''
+              mar = false
+              nums = []
+              for t in rule.prelude
+                if t.name is '('
+                  prelude += '('
+                  for t1 in t.value
+                    source = if t1.toSourceString? then t1.toSourceString() else ''
+                    if t1.tokenType is 'IDENT' and source is 'max-aspect-ratio'
+                      mar = true
+                    if t1.tokenType is 'NUMBER' 
+                      nums.push parseInt source
+
+                    prelude += source
+                  #prelude += (map t.value, (o) -> if o.toSourceString? then o.toSourceString() else '').join ''
+                  #prelude += t.value.join ''
+                  prelude += ')'
+                else
+                  prelude += t.toSourceString()
+              if vpAspectRatio < nums[0] / nums[1]
+                sheetCss += generateSheetCode rule
+            else
+              prelude = ''
+              for t in rule.prelude
+                if t.name is '('
+                  prelude += '('
+                  prelude += (map t.value, (o) -> if o.toSourceString? then o.toSourceString() else '').join ''
+                  #prelude += t.value.join ''
+                  prelude += ')'
+                else
+                  prelude += t.toSourceString()
+              sheetCss += "@#{rule.name} #{prelude} {"
+              sheetCss += generateSheetCode rule
+              sheetCss += '}\n'
       sheetCss
     css = ''
     for url, sheet of sheets
