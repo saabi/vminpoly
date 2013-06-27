@@ -497,6 +497,7 @@ function stringFromCodeArray(arr) {
 function CSSParserToken(options) { return this; }
 CSSParserToken.prototype.finish = function() { return this; }
 CSSParserToken.prototype.toString = function() { return this.tokenType; }
+CSSParserToken.prototype.toSourceString = CSSParserToken.prototype.toString;
 CSSParserToken.prototype.toJSON = function() { return this.toString(); }
 
 function BadStringToken() { return this; }
@@ -510,7 +511,8 @@ BadURLToken.prototype.tokenType = "BADURL";
 function WhitespaceToken() { return this; }
 WhitespaceToken.prototype = new CSSParserToken;
 WhitespaceToken.prototype.tokenType = "WHITESPACE";
-WhitespaceToken.prototype.toString = function() { return " "; }
+WhitespaceToken.prototype.toString = function() { return "WS"; }
+WhitespaceToken.prototype.toSourceString = function() { return " "; }
 
 function CDOToken() { return this; }
 CDOToken.prototype = new CSSParserToken;
@@ -562,7 +564,8 @@ function DelimToken(code) {
 }
 DelimToken.prototype = new CSSParserToken;
 DelimToken.prototype.tokenType = "DELIM";
-DelimToken.prototype.toString = function() { return this.value; }
+DelimToken.prototype.toString = function() { return "DELIM("+this.value+")"; }
+DelimToken.prototype.toSourceString = function() { return this.value; }
 
 function StringValuedToken() { return this; }
 StringValuedToken.prototype = new CSSParserToken;
@@ -603,7 +606,8 @@ function IdentifierToken(val) {
 }
 IdentifierToken.prototype = new StringValuedToken;
 IdentifierToken.prototype.tokenType = "IDENT";
-IdentifierToken.prototype.toString = function() { return this.value; }
+IdentifierToken.prototype.toString = function() { return "IDENT("+this.value+")"; }
+IdentifierToken.prototype.toSourceString = function() { return this.value; }
 
 function FunctionToken(val) {
 	// These are always constructed by passing an IdentifierToken
@@ -611,7 +615,8 @@ function FunctionToken(val) {
 }
 FunctionToken.prototype = new StringValuedToken;
 FunctionToken.prototype.tokenType = "FUNCTION";
-FunctionToken.prototype.toString = function() { return this.value; }
+FunctionToken.prototype.toString = function() { return "FUNCTION("+this.value+")"; }
+FunctionToken.prototype.toSourceString = function() { return this.value; }
 
 function AtKeywordToken(val) {
 	this.value = [];
@@ -619,7 +624,8 @@ function AtKeywordToken(val) {
 }
 AtKeywordToken.prototype = new StringValuedToken;
 AtKeywordToken.prototype.tokenType = "AT-KEYWORD";
-AtKeywordToken.prototype.toString = function() { return "@"+this.value; }
+AtKeywordToken.prototype.toString = function() { return "AT("+this.value+")"; }
+AtKeywordToken.prototype.toSourceString = function() { return "@"+this.value; }
 
 function HashToken(val) {
 	this.value = [];
@@ -627,7 +633,8 @@ function HashToken(val) {
 }
 HashToken.prototype = new StringValuedToken;
 HashToken.prototype.tokenType = "HASH";
-HashToken.prototype.toString = function() { return "#"+this.value; }
+HashToken.prototype.toString = function() { return "HASH("+this.value+")"; }
+HashToken.prototype.toSourceString = function() { return "#"+this.value; }
 
 function StringToken(val) {
 	this.value = [];
@@ -636,6 +643,7 @@ function StringToken(val) {
 StringToken.prototype = new StringValuedToken;
 StringToken.prototype.tokenType = "STRING";
 StringToken.prototype.toString = function() { return "\""+this.value+"\""; }
+StringToken.prototype.toSourceString = StringToken.prototype.toString;
 
 function URLToken(val) {
 	this.value = [];
@@ -643,7 +651,8 @@ function URLToken(val) {
 }
 URLToken.prototype = new StringValuedToken;
 URLToken.prototype.tokenType = "URL";
-URLToken.prototype.toString = function() { return this.value; }
+URLToken.prototype.toString = function() { return "URL("+this.value+")"; }
+URLToken.prototype.toSourceString = function() { return "url('"+this.value+"')"; }
 
 function NumberToken(val) {
 	this.value = [];
@@ -654,6 +663,11 @@ NumberToken.prototype = new StringValuedToken;
 NumberToken.prototype.tokenType = "NUMBER";
 NumberToken.prototype.toString = function() {
 	if(this.type == "integer")
+		return "INT("+this.value+")";
+	return "NUMBER("+this.value+")";
+}
+NumberToken.prototype.toSourceString = function() {
+ 	if(this.type == "integer")
 		return this.value;
 	return this.value;
 }
@@ -672,7 +686,8 @@ function PercentageToken(val) {
 }
 PercentageToken.prototype = new CSSParserToken;
 PercentageToken.prototype.tokenType = "PERCENTAGE";
-PercentageToken.prototype.toString = function() { return this.value; }
+PercentageToken.prototype.toString = function() { return "PERCENTAGE("+this.value+")"; }
+PercentageToken.prototype.toSourceString = function() { return this.value+'%'; }
 
 function DimensionToken(val,unit) {
 	// These are always created by passing a NumberToken as the val
@@ -684,7 +699,8 @@ function DimensionToken(val,unit) {
 }
 DimensionToken.prototype = new CSSParserToken;
 DimensionToken.prototype.tokenType = "DIMENSION";
-DimensionToken.prototype.toString = function() { return this.num+this.unit; }
+DimensionToken.prototype.toString = function() { return "DIM("+this.num+","+this.unit+")"; }
+DimensionToken.prototype.toSourceString = function() { return this.num+this.unit; }
 DimensionToken.prototype.append = function(val) {
 	if(val instanceof Array) {
 		for(var i = 0; i < val.length; i++) {
@@ -718,6 +734,13 @@ function UnicodeRangeToken(start,end) {
 UnicodeRangeToken.prototype = new CSSParserToken;
 UnicodeRangeToken.prototype.tokenType = "UNICODE-RANGE";
 UnicodeRangeToken.prototype.toString = function() {
+	if(this.start+1 == this.end)
+		return "UNICODE-RANGE("+this.start.toString(16).toUpperCase()+")";
+	if(this.start < this.end)
+		return "UNICODE-RANGE("+this.start.toString(16).toUpperCase()+"-"+this.end.toString(16).toUpperCase()+")";
+	return "UNICODE-RANGE()";
+}
+UnicodeRangeToken.prototype.toSourceString = function() {
 	if(this.start+1 == this.end)
 		return "UNICODE-RANGE("+this.start.toString(16).toUpperCase()+")";
 	if(this.start < this.end)
