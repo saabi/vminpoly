@@ -231,7 +231,7 @@
     }
     window.onresize = onresize;
     document.body.onload = function() {
-      return setTimeout(onresize, 100);
+      return setTimeout(onresize, 200);
     };
   };
 
