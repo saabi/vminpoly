@@ -27,3 +27,8 @@ TODO:
 * Add some more examples of what can be achieved.
 
 In short, the only browser with apparently full native support right now is Firefox beta (Aurora). The rest will benefit from this polyfill immediately, even without the badly needed code polishing.
+
+Latest Changes:
+---------------
+
+After some bug fixes it finally works down to IE6!
