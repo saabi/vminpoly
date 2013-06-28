@@ -14,6 +14,12 @@ As it is, it's fast enough for a lot of cases, but the code can still be optimiz
 
 Also, any suggestions on how to better organize the repo, specially with respect to third party code, is greatly appreciated.
 
+Notes
+-----
+* It's working fine in IE5.5+, Firefox, Opera and even Opera Mini, which doesn't support any of the units or media queries. Chrome, Safari and the Firefox beta don't need it.
+* Well... Chrome and Safari actually can benefit from it as they don't properly handle font-size natively while resizing the window.
+
+
 TODO:
 -----
 
@@ -21,8 +27,6 @@ TODO:
 * IE9 and IE10 support vw, vh & vm, so the code should only translate 'vmin' units to 'vm'
 * Only linked stylesheets are being parsed right now but it's very easy to also parse 'style' elements.
 * Also, recursively parse @import rules.
-* It's working fine in IE5.5+, Firefox, Opera and even Opera Mini, which doesn't support any of the units or media queries. Chrome, Safari and the Firefox beta don't need it.
-* Well... Chrome and Safari actually can benefit from it as they don't properly handle font-size natively while resizing the window.
 * Add some more examples of what can be achieved.
 
 In short, the only browser with apparently full native support right now is Firefox beta (Aurora). The rest will benefit from this polyfill immediately, even without the badly needed code polishing.
