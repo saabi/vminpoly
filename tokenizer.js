@@ -109,7 +109,14 @@ function tokenize(str, options) {
 					consume();
 				} else { break; }
 			}
-			var value = parseInt(digits.map(String.fromCharCode).join(''), 16);
+			if(digits.map != null) {
+				var value = parseInt(digits.map(String.fromCharCode).join(''), 16);
+			} else {
+				d1 = [];
+				_len = digits.length;
+				for (_i = 0; _i < _len; _i++) { d1.push(String.fromCharCode(digits[_i])); }
+				var value = parseInt(d1.join(''), 16);
+			}
 			if( value > maximumallowedcodepoint ) value = 0xfffd;
 			// If the current char is whitespace, cool, we'll just eat it.
 			// Otherwise, put it back.
