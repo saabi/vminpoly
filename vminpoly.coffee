@@ -25,7 +25,7 @@ ajax = (url, onload) ->
   xmlhttp.onreadystatechange = ->
     unless xmlhttp.readyState is 4
       return
-    unless xmlhttp.status is 200
+    unless xmlhttp.status is 200 || url.match(/^file:\/\/\//)
       throw "Error!"
     console.log "INFO: processing #{url}"
     onload xmlhttp.responseText
