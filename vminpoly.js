@@ -42,10 +42,15 @@
       if (xmlhttp.status !== 200) {
         throw "Error!";
       }
+      console.log("INFO: processing " + url);
       onload(xmlhttp.responseText);
     };
-    xmlhttp.open("GET", url, true);
-    xmlhttp.send();
+    try {
+      xmlhttp.open("GET", url, true);
+      xmlhttp.send();
+    } catch (e) {
+      console.log("ERROR: " + e.message + " (" + e.type + ") when accessing " + url);
+    }
   };
 
   getViewportSize = function() {
