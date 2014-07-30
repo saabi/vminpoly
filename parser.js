@@ -243,6 +243,15 @@ function parse(tokens) {
 	}
 }
 
+function stripVendorPrefix(name) {
+    var prefixRegex = /^((?:-|_)[a-z][a-z0-9]*)-(.+)$/i;
+    if (prefixRegex.test(name)) {
+        return prefixRegex.exec(name)[2];
+    } else {
+        return name;
+    }
+}
+
 function CSSParserRule() { return this; }
 CSSParserRule.prototype.fillType = '';
 CSSParserRule.prototype.toString = function(indent) {
@@ -264,11 +273,11 @@ Stylesheet.prototype.toJSON = function() {
 }
 
 function AtRule(name) {
-	this.name = name;
+    this.name = stripVendorPrefix(name);
 	this.prelude = [];
 	this.value = [];
-	if(name in AtRule.registry)
-		this.fillType = AtRule.registry[name];
+	if (this.name in AtRule.registry)
+	    this.fillType = AtRule.registry[this.name];
 	return this;
 }
 AtRule.prototype = new CSSParserRule;
