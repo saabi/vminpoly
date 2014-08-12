@@ -1,0 +1,26 @@
+{
+  "name": "vminpoly",
+  "main": "vminpoly.js",
+  "version": "0.1.0",
+  "homepage": "https://github.com/saabi/vminpoly",
+  "authors": [
+    "Sebastian Ferreyra <sebastian.ferreyra@infomerx.com>"
+  ],
+  "description": "A polyfill for CSS units vw, vh & vmin and now some media queries to boot.",
+  "keywords": [
+    "polyfill",
+    "css",
+    "units",
+    "vmin",
+    "vmax",
+    "vw",
+    "vh",
+    "media-queries"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "*.html",
+    "*.css",
+    "*.coffee"
+  ]
+}
