@@ -25,12 +25,16 @@ ajax = (url, onload) ->
   xmlhttp.onreadystatechange = ->
     unless xmlhttp.readyState is 4
       return
-    unless xmlhttp.status is 200
+    unless xmlhttp.status is 200 || url.match(/^file:\/\/\//)
       throw "Error!"
+    console.log "INFO: processing #{url}"
     onload xmlhttp.responseText
     return
-  xmlhttp.open "GET", url, true
-  xmlhttp.send()
+  try
+    xmlhttp.open "GET", url, true
+    xmlhttp.send()
+  catch e
+    console.log "ERROR: #{e.message} (#{e.type}) when accessing #{url}"
   return
 
 # get window dimensions, cross-browser compatible
