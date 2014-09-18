@@ -55,6 +55,98 @@ getViewportSize = ->
   width: x
   height: y
 
+browserSupportsUnitsNatively = ->
+  # Append Test element
+  test_element = document.createElement('div')
+  test_element.id = "vminpolyTests"
+  body = document.getElementsByTagName('body')[0]
+  body.appendChild test_element
+
+  # Append test style block
+  style_block = document.createElement('style')
+  head = document.getElementsByTagName('head')[0]
+  head.appendChild style_block
+
+  test_results = testVWSupport(test_element, style_block) and testVWSupport(test_element, style_block) and testVMinSupport(test_element, style_block)
+
+  body.removeChild test_element
+  head.removeChild style_block
+
+  test_results
+
+testElementStyle = (element) ->
+  if window.getComputedStyle
+    getComputedStyle(element, null)
+  else
+    element.currentStyle
+
+applyStyleTest = (style_block, style) ->
+  new_style = "#vminpolyTests { #{style}; }"
+  if style_block.styleSheet
+    style_block.styleSheet.cssText = new_style
+  else
+    test_style = document.createTextNode new_style
+    style_block.appendChild test_style
+
+clearStyleTests = (style_block) ->
+  if style_block.styleSheet
+    style_block.styleSheet.cssText = ''
+  else
+    style_block.innerHTML = ''
+
+testVHSupport = (element, style_block) ->
+  # Set height of element
+  applyStyleTest(style_block, 'height: 50vh')
+
+  # Parse page height to compare
+  height = parseInt(window.innerHeight / 2, 10)
+
+  # Computed style
+  comp_style = parseInt(testElementStyle(element).height, 10)
+
+  # Remove current test style
+  clearStyleTests style_block
+
+  # return result
+  comp_style is height
+
+testVWSupport = (element, style_block) ->
+  # Set width of element
+  applyStyleTest(style_block, 'width: 50vw')
+
+  # Parse page width to compare
+  width = parseInt(window.innerWidth / 2, 10)
+
+  # Computed style
+  comp_style = parseInt(testElementStyle(element).width, 10)
+
+  # Remove current test style
+  clearStyleTests style_block
+
+  # return result
+  comp_style is width
+
+testVMinSupport = (element, style_block) ->
+  # Set width of the element
+  applyStyleTest(style_block, 'width: 50vmin')
+
+  # docElement has to be defined, can you believe it
+  docElement = document.documentElement
+
+  # find minimum calculation sizes
+  one_vw = docElement.clientWidth / 100
+  one_vh = docElement.clientHeight / 100
+  actual_vmin = parseInt(Math.min(one_vw, one_vh)*50,10)
+
+  # Computed width
+  comp_width = parseInt(testElementStyle(element).width, 10)
+
+  # Remove current test style
+  clearStyleTests style_block
+
+  # return result
+  actual_vmin is comp_width
+
 initLayoutEngine = () ->
   analyzeStyleRule = (rule) ->
     declarations = []
@@ -85,7 +177,7 @@ initLayoutEngine = () ->
   onresize = ->
     vpDims = getViewportSize()
 
-    dims = 
+    dims =
       vh: vpDims.height / 100
       vw: vpDims.width / 100
     dims.vmin = Math.min dims.vh, dims.vw
@@ -135,7 +227,7 @@ initLayoutEngine = () ->
                     source = if t1.toSourceString? then t1.toSourceString() else ''
                     if t1.tokenType is 'IDENT' and source is 'max-aspect-ratio'
                       mar = true
-                    if t1.tokenType is 'NUMBER' 
+                    if t1.tokenType is 'NUMBER'
                       nums.push parseInt source
 
                     prelude += source
@@ -193,6 +285,5 @@ initLayoutEngine = () ->
   window.onresize = onresize
   return
 
-initLayoutEngine()
-
-
+console.log 'About to do the engine unless...', browserSupportsUnitsNatively()
+initLayoutEngine() unless browserSupportsUnitsNatively()
