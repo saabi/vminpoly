@@ -285,5 +285,4 @@ initLayoutEngine = () ->
   window.onresize = onresize
   return
 
-console.log 'About to do the engine unless...', browserSupportsUnitsNatively()
 initLayoutEngine() unless browserSupportsUnitsNatively()
