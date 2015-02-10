@@ -23,7 +23,6 @@ Notes
 TODO:
 -----
 
-* Add feature detection, at the moment it's doing its stuff even in browsers that support the units.
 * IE9 and IE10 support vw, vh & vm, so the code should only translate 'vmin' units to 'vm'
 * Only linked stylesheets are being parsed right now but it's very easy to also parse 'style' elements.
 * Also, recursively parse @import rules.
