@@ -59,6 +59,9 @@ function parse(tokens) {
 	var pop = function() {
 		var oldrule = stack.pop();
 		rule = stack[stack.length - 1];
+		if (rule === undefined) {
+			return false;
+		}
 		rule.append(oldrule);
 		return true;
 	}
