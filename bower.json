@@ -1,7 +1,6 @@
 {
   "name": "vminpoly",
   "main": "vminpoly.js",
-  "version": "0.1.0",
   "homepage": "https://github.com/saabi/vminpoly",
   "authors": [
     "Sebastian Ferreyra <sebastian.ferreyra@infomerx.com>"
