@@ -3,7 +3,8 @@
   "main": "vminpoly.js",
   "homepage": "https://github.com/saabi/vminpoly",
   "authors": [
-    "Sebastian Ferreyra <sebastian.ferreyra@infomerx.com>"
+    "Sebastian Ferreyra <sebastian.ferreyra@infomerx.com>",
+    "Cory Simmons"
   ],
   "description": "A polyfill for CSS units vw, vh & vmin and now some media queries to boot.",
   "keywords": [
