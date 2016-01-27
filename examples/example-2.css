@@ -1,32 +1,25 @@
-body,
-#footer {
+body, #footer {
   -webkit-transition: height, width 500ms cubic-bezier(0.115, 0, 0, 1);
-  -moz-transition: height, width 500ms cubic-bezier(0.115, 0, 0, 1);
-  -o-transition: height, width 500ms cubic-bezier(0.115, 0, 0, 1);
   transition: height, width 500ms cubic-bezier(0.115, 0, 0, 1);
 }
-#logo,
-#highlights,
-#nav,
-#news div,
-#ads div,
-#footer {
+
+#logo, #highlights, #nav, #news div, #ads div, #footer {
   -webkit-transition: all 500ms cubic-bezier(0.115, 0, 0, 1);
-  -moz-transition: all 500ms cubic-bezier(0.115, 0, 0, 1);
-  -o-transition: all 500ms cubic-bezier(0.115, 0, 0, 1);
   transition: all 500ms cubic-bezier(0.115, 0, 0, 1);
 }
 
-html {background: white;}
-#logo,
-#nav,
-#news div,
-#footer {
+html {
+  background: white;
+}
+
+#logo, #nav, #news div, #footer {
   background: silver;
 }
+
 #ads div {
   background: gray;
 }
+
 #highlights {
   background: darkblue;
   color: white;
@@ -35,9 +28,11 @@ html {background: white;}
 h1 {
   font-size: 4vmin;
 }
+
 div {
-    font-size: 4vmin;
+  font-size: 4vmin;
 }
+
 html {
   position: absolute;
   width: 100%;
@@ -46,6 +41,7 @@ html {
   margin: 0;
   overflow: hidden;
 }
+
 body {
   position: relative;
   margin: 5.4vmin auto;
@@ -53,6 +49,7 @@ body {
   height: 90vmin;
   overflow: hidden;
 }
+
 #logo {
   margin: 0;
   padding: 0;
@@ -63,16 +60,19 @@ body {
   height: 18.8vmin;
   overflow: hidden;
 }
+
 a {
   text-decoration: none;
 }
+
 #nav {
   position: absolute;
   left: 40.6vmin;
   top: 0.6vmin;
   width: 118.8vmin;
-  height: 18.8vmin;  
+  height: 18.8vmin;
 }
+
 #highlights {
   position: absolute;
   overflow: hidden;
@@ -81,51 +81,57 @@ a {
   top: 20.6vmin;
   left: 0.6vmin;
 }
-#item1,
-#item2,
-#item3 {
+
+#item1, #item2, #item3 {
   display: block;
 }
-#news div,
-#ads div {
+
+#news div, #ads div {
   position: absolute;
 }
+
 #item1 {
   left: 0.6vmin;
   top: 60.6vmin;
   width: 38.8vmin;
   height: 18.8vmin;
 }
+
 #item2 {
   left: 40.6vmin;
   top: 60.6vmin;
   width: 38.8vmin;
   height: 18.8vmin;
 }
+
 #item3 {
   left: 80.6vmin;
   top: 60.6vmin;
   width: 38.8vmin;
   height: 18.8vmin;
 }
+
 #ad1 {
   top: 20.6vmin;
   left: 80.6vmin;
   width: 38.8vmin;
   height: 18.8vmin;
 }
+
 #ad2 {
   top: 40.6vmin;
   left: 80.6vmin;
   width: 38.8vmin;
   height: 18.8vmin;
 }
+
 #ad3 {
   top: 20.6vmin;
   left: 120.6vmin;
   width: 38.8vmin;
   height: 18.8vmin;
 }
+
 #footer {
   position: absolute;
   left: 0.6vmin;
@@ -134,48 +140,56 @@ a {
   top: 80.6vmin;
 }
 
-@media (max-aspect-ratio:80/45) {
+@media (max-aspect-ratio: 80/45) {
   body {
     width: 140vmin;
   }
+
   #logo {
     width: 18.8vmin;
   }
+
   #nav {
     position: absolute;
     left: 20.6vmin;
     width: 118.8vmin;
   }
+
   #highlights {
     left: 0.6vmin;
   }
-  #ad1,
-  #ad2 {
+
+  #ad1, #ad2 {
     left: 80.6vmin;
   }
+
   #ad3 {
     left: 120.6vmin;
     top: 20.6vmin;
     width: 18.8vmin;
     height: 38.8vmin;
   }
+
   #footer {
     width: 138.8vmin;
   }
 }
-@media (max-aspect-ratio:80/55) {
+
+@media (max-aspect-ratio: 80/55) {
   body {
     margin: 4.5vmin auto;
     width: 116.66666666666667vmin;
     height: 91.66666666666667vmin;
     font-size: 1.6666666666666667vmin;
   }
+
   #logo {
     left: 0.5vmin;
     top: 0.5vmin;
     width: 15.666666666666668vmin;
     height: 15.666666666666668vmin;
   }
+
   #nav {
     position: absolute;
     left: 17.166666666666668vmin;
@@ -183,48 +197,56 @@ a {
     width: 99vmin;
     height: 15.666666666666668vmin;
   }
+
   #highlights {
     left: 0.5vmin;
     top: 17.166666666666668vmin;
     width: 82.33333333333333vmin;
     height: 49vmin;
   }
+
   #item1 {
     left: 0.5vmin;
     width: 32.333333333333336vmin;
     height: 15.666666666666668vmin;
     top: 67.16666666666667vmin;
   }
+
   #item2 {
     left: 33.833333333333336vmin;
     width: 32.333333333333336vmin;
     height: 15.666666666666668vmin;
     top: 67.16666666666667vmin;
   }
+
   #item3 {
     left: 67.16666666666667vmin;
     width: 32.333333333333336vmin;
     height: 15.666666666666668vmin;
     top: 67.16666666666667vmin;
   }
+
   #ad1 {
     top: 17.166666666666668vmin;
     left: 83.83333333333333vmin;
     width: 32.333333333333336vmin;
     height: 15.666666666666668vmin;
   }
+
   #ad2 {
     top: 33.833333333333336vmin;
     left: 83.83333333333333vmin;
     width: 32.333333333333336vmin;
     height: 15.666666666666668vmin;
   }
+
   #ad3 {
     top: 50.5vmin;
     left: 83.83333333333333vmin;
     width: 32.333333333333336vmin;
     height: 15.666666666666668vmin;
   }
+
   #footer {
     left: 0.5vmin;
     width: 115.66666666666667vmin;
@@ -232,98 +254,116 @@ a {
     top: 83.83333333333333vmin;
   }
 }
-@media (max-aspect-ratio:70/55) {
+
+@media (max-aspect-ratio: 70/55) {
   body {
     width: 100vmin;
   }
+
   #nav {
     width: 83.33333333333333vmin;
   }
+
   #highlights {
     left: 17.166666666666668vmin;
     width: 65.66666666666667vmin;
     height: 32.333333333333336vmin;
   }
+
   #ad1 {
     top: 50.5vmin;
     width: 32.333333333333336vmin;
     left: 0.5vmin;
   }
+
   #ad2 {
     top: 50.5vmin;
     width: 32.333333333333336vmin;
     left: 33.833333333333336vmin;
   }
+
   #ad3 {
     top: 50.5vmin;
     width: 32.333333333333336vmin;
     left: 67.16666666666667vmin;
   }
+
   #footer {
     width: 99vmin;
   }
 }
-@media (max-aspect-ratio:65/65) {
+
+@media (max-aspect-ratio: 65/65) {
   body {
     margin: 3.857142857142857vmin auto;
     width: 71.42857142857143vmin;
     height: 92.85714285714286vmin;
     font-size: 1.4285714285714286vmin;
   }
+
   #logo {
     left: 0.42857142857142855vmin;
     top: 0.42857142857142855vmin;
     width: 13.428571428571429vmin;
     height: 13.428571428571429vmin;
   }
+
   #nav {
     left: 14.714285714285715vmin;
     top: 0.42857142857142855vmin;
     width: 56.28571428571429vmin;
     height: 13.428571428571429vmin;
   }
+
   #highlights {
     left: 0.42857142857142855vmin;
     top: 14.714285714285715vmin;
     width: 70.57142857142857vmin;
     height: 42vmin;
   }
+
   #item1 {
     left: 0.42857142857142855vmin;
     top: 57.57142857142858vmin;
     width: 27.714285714285715vmin;
     height: 13.428571428571429vmin;
   }
+
   #item2 {
     left: 0.42857142857142855vmin;
     top: 71.85714285714286vmin;
     width: 27.714285714285715vmin;
     height: 13.428571428571429vmin;
   }
+
   #item3 {
     left: 29vmin;
     top: 71.85714285714286vmin;
     width: 27.714285714285715vmin;
     height: 13.428571428571429vmin;
   }
+
   #ad1 {
     top: 57.57142857142858vmin;
     left: 29vmin;
     width: 13.428571428571429vmin;
     height: 13.428571428571429vmin;
   }
+
   #ad2 {
     top: 57.57142857142858vmin;
     left: 43.285714285714285vmin;
     width: 13.428571428571429vmin;
     height: 13.428571428571429vmin;
   }
+
   #ad3 {
     top: 57.57142857142858vmin;
     height: 27.714285714285715vmin;
     width: 13.428571428571429vmin;
     left: 57.57142857142858vmin;
   }
+
   #footer {
     top: 86.14285714285714vmin;
     left: 0.42857142857142855vmin;
@@ -331,42 +371,53 @@ a {
     height: 6.2857142857142865vmin;
   }
 }
+
 @media (max-aspect-ratio:65/75) {
   body {
     margin: 3.857142857142857vmin auto;
     height: 107.14285714285714vmin;
   }
+
   #logo {
     top: 0.42857142857142855vmin;
     width: 27.714285714285715vmin;
   }
+
   #nav {
     left: 0.42857142857142855vmin;
     top: 14.714285714285715vmin;
     width: 70.57142857142857vmin;
     height: 13.428571428571429vmin;
   }
+
   #highlights {
     top: 29vmin;
   }
+
   #item1 {
     top: 71.85714285714286vmin;
   }
+
   #item2 {
     top: 86.14285714285714vmin;
   }
+
   #item3 {
     top: 86.14285714285714vmin;
   }
+
   #ad1 {
     top: 71.85714285714286vmin;
   }
+
   #ad2 {
     top: 71.85714285714286vmin;
   }
+
   #ad3 {
     top: 71.85714285714286vmin;
   }
+
   #footer {
     left: 0.42857142857142855vmin;
     width: 70.57142857142857vmin;
@@ -374,30 +425,38 @@ a {
     top: 100.42857142857143vmin;
   }
 }
-@media (max-aspect-ratio:65/85) {
+
+@media (max-aspect-ratio: 65/85) {
   body {
     height: 121.42857142857143vmin;
   }
+
   #item1 {
     top: 86.14285714285714vmin;
   }
+
   #item2 {
     top: 100.42857142857143vmin;
   }
+
   #item3 {
     top: 86.14285714285714vmin;
   }
+
   #ad1 {
     left: 0.42857142857142855vmin;
     width: 27.714285714285715vmin;
   }
+
   #ad2 {
     left: 29vmin;
     width: 27.714285714285715vmin;
   }
+
   #ad3 {
     top: 71.85714285714286vmin;
   }
+
   #footer {
     top: 114.71428571428572vmin;
   }
