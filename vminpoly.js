@@ -81,7 +81,7 @@
     style_block = document.createElement('style');
     head = document.getElementsByTagName('head')[0];
     head.appendChild(style_block);
-    test_results = testVWSupport(test_element, style_block) && testVWSupport(test_element, style_block) && testVMinSupport(test_element, style_block);
+    test_results = testVWSupport(test_element, style_block) && testVHSupport(test_element, style_block) && testVMinSupport(test_element, style_block);
     body.removeChild(test_element);
     head.removeChild(style_block);
     return test_results;
