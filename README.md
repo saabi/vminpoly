@@ -1,13 +1,13 @@
 vminpoly
 ========
 
-A polyfill for CSS units vw, vh &amp; vmin.
+A polyfill for CSS units vw, vh, vmin, &amp; vmax.
 
 Simple online [demo](http://saabi.github.com/vminpoly) right here. A more sophisticated [responsive demo](http://saabi.github.com/vminpoly/demo2.html) demonstrating vw/vh/vmin units along with *media queries*, working right down to IE5.5 on the desktop and Opera Mini on mobiles!! (In Opera Mini the browser must be refreshed after changing phone orientations as it appears it doesn't trigger the window resize event)
 
 This is a working proof of concept right now. There's a lot of cleanup to do on the code.
 
-Since most browsers ignore rules they don't understand, the code must load and parse the original CSS sourcecode. It does this using a javascript [CSS parser](https://github.com/tabatkins/css-parser). Once this is done, it filters the generated tree leaving only rules that use 'vh', 'vw' & 'vmin' units.
+Since most browsers ignore rules they don't understand, the code must load and parse the original CSS sourcecode. It does this using a javascript [CSS parser](https://github.com/tabatkins/css-parser). Once this is done, it filters the generated tree leaving only rules that use 'vh', 'vw', 'vmin' & 'vmax' units.
 At window resize time, it generates CSS code for the 'px' equivalents and appends it in a 'style' element at the end of the 'head' element. The generated code respects media queries.
 
 As it is, it's fast enough for a lot of cases, but the code can still be optimized greatly, both in parsing and in resizing.
@@ -33,6 +33,7 @@ In short, the only browser with apparently full native support right now is Fire
 Latest Changes:
 ---------------
 
+* Added vmax unit support!
 * After some bug fixes it finally works down to **IE5.5 on the desktop** and **Opera Mini on mobile**!!
 * Also, I removed the dependency on jQuery.
 * Now resizes correctly right after page load.
