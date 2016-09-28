@@ -67,7 +67,7 @@ browserSupportsUnitsNatively = ->
   head = document.getElementsByTagName('head')[0]
   head.appendChild style_block
 
-  test_results = testVWSupport(test_element, style_block) and testVWSupport(test_element, style_block) and testVMinSupport(test_element, style_block)
+  test_results = testVWSupport(test_element, style_block) and testVWSupport(test_element, style_block) and testVMinSupport(test_element, style_block) and testVMaxSupport(test_element, style_block)
 
   body.removeChild test_element
   head.removeChild style_block
@@ -147,13 +147,34 @@ testVMinSupport = (element, style_block) ->
   # return result
   actual_vmin is comp_width
 
+testVMaxSupport = (element, style_block) ->
+  # Set width of the element
+  applyStyleTest(style_block, 'width: 50vmax')
+
+  # docElement has to be defined, can you believe it
+  docElement = document.documentElement
+
+  # find maximum calculation sizes
+  one_vw = docElement.clientWidth / 100
+  one_vh = docElement.clientHeight / 100
+  actual_vmax = parseInt(Math.max(one_vw, one_vh)*50,10)
+
+  # Computed width
+  comp_width = parseInt(testElementStyle(element).width, 10)
+
+  # Remove current test style
+  clearStyleTests style_block
+
+  # return result
+  actual_vmax is comp_width
+
 initLayoutEngine = () ->
   analyzeStyleRule = (rule) ->
     declarations = []
     for declaration in rule.value
       hasDimension = false
       for token in declaration.value
-        if token.tokenType is 'DIMENSION' and (token.unit is 'vmin' or token.unit is 'vh' or token.unit is 'vw')
+        if token.tokenType is 'DIMENSION' and (token.unit is 'vmin' or token.unit is 'vh' or token.unit is 'vw' or token.unit is 'vmax')
           hasDimension = true
       if hasDimension
         declarations.push declaration
@@ -181,6 +202,7 @@ initLayoutEngine = () ->
       vh: vpDims.height / 100
       vw: vpDims.width / 100
     dims.vmin = Math.min dims.vh, dims.vw
+    dims.vmax = Math.max dims.vh, dims.vw
 
     vpAspectRatio = vpDims.width / vpDims.height
 
@@ -202,7 +224,7 @@ initLayoutEngine = () ->
         ruleCss += declaration.name
         ruleCss += ":"
         for token in declaration.value
-          if token.tokenType is 'DIMENSION' and (token.unit is 'vmin' or token.unit is 'vh' or token.unit is 'vw')
+          if token.tokenType is 'DIMENSION' and (token.unit is 'vmin' or token.unit is 'vh' or token.unit is 'vw' or token.unit is 'vmax')
             ruleCss += "#{Math.floor(token.num*dims[token.unit])}px"
           else
             ruleCss += token.toSourceString()
