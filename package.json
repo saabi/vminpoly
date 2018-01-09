@@ -1,0 +1,53 @@
+{
+  "_from": "vminpoly@^1.0.0",
+  "_id": "vminpoly@1.0.0",
+  "_inBundle": false,
+  "_integrity": "sha1-Ie1oW8sDIlIPoZqN1hgQXENvZBU=",
+  "_location": "/vminpoly",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "vminpoly@^1.0.0",
+    "name": "vminpoly",
+    "escapedName": "vminpoly",
+    "rawSpec": "^1.0.0",
+    "saveSpec": null,
+    "fetchSpec": "^1.0.0"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/vminpoly/-/vminpoly-1.0.0.tgz",
+  "_shasum": "21ed685bcb0322520fa19a8dd618105c436f6415",
+  "_spec": "vminpoly@^1.0.0",
+  "_where": "/Users/vjani/ctv/oncue/WebServices-ctv/http/src/main/webapp/client",
+  "author": {
+    "name": "Fadi Qassem"
+  },
+  "bugs": {
+    "url": "https://github.com/fqassem/vminpoly/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Vm, vh, vmin polyfill",
+  "homepage": "https://github.com/fqassem/vminpoly#readme",
+  "keywords": [
+    "vh",
+    "vm",
+    "vmin",
+    "polyfill"
+  ],
+  "license": "MIT",
+  "main": "vminpoly.js",
+  "name": "vminpoly",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fqassem/vminpoly.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.0"
+}
